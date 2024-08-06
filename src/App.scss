@@ -1,0 +1,347 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Gupter", serif;
+    font-size: 18px;
+}
+
+/*-------- media queries -------- */
+
+@mixin smScreen() {
+    @media screen and (max-width: 800px) {
+        @content;
+    }
+}
+
+@mixin mdScreen() {
+    @media screen and (max-width: 1000px) {
+        @content;
+    }
+}
+
+
+/* -------- HOME PAGE ---------- */
+
+.dashboard {
+    padding: 40px;
+    background-color: white;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .logo {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        margin-top: 30px;
+
+        &.active {
+            margin-right: 500px;
+
+            @include smScreen() {
+                display: none;
+            }
+        }
+
+
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+
+            span {
+                color: gold;
+                font-size: 20;
+            }
+
+            img {
+                width: 350px;
+
+                @include mdScreen() {
+                    width: 300px;
+                }
+            }
+
+        }
+
+        h1 {
+            font-size: 30px;
+            font-weight: bold;
+
+            @include mdScreen() {
+                font-size: 25px;
+            }
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: bold;
+             
+            @include mdScreen() {
+                font-size: 17px;
+            }
+        }
+    }
+
+}
+
+/* -------- OPEN CHAT BUTTON ---------- */
+
+.floatingButton {
+    border-radius: 50%;
+    background-color: rgb(13, 13, 68);
+    color: white;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: 70px;
+    right: 40px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: slideup 0.3s ease-out;
+    transition: 0.5s ease-out;
+
+    &:hover {
+        background-color: rgb(7, 7, 48);
+        transform: translateY(-10px);
+    }
+
+    .icon {
+        font-size: 30px;
+    }
+
+    @keyframes slideup {
+
+        0% {
+            bottom: 40px;
+        } 100% {
+            bottom: 70px;
+        }
+        
+    }
+
+}
+
+/*------------ CHAT BOT --------------- */
+
+.chatBot {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    background-color: rgb(242, 244, 245);
+    display: flex;
+    width: 500px;
+    z-index: 2;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    box-shadow: 0 4px 3px rgba(0, 0, 0, 0.5);
+    align-items: flex-start;
+    flex-direction: column;
+    animation: slideRight 0.3s ease-out;
+
+    @include smScreen() {
+        width: 100%;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        
+    }
+    
+
+    @keyframes slideRight {
+        from {
+            transform: translateX(500px);
+        } to {
+            transform: translateX(0);
+        }
+        
+    }
+
+    .top {
+        height: 70px;
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        background-color: rgb(7, 7, 48);
+        border-top-left-radius: 8px;
+        padding: 0 20px;
+        color: white;
+
+        @include smScreen() {
+            border-top-left-radius: 0;
+        }
+        
+
+        img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .icon {
+            font-size: 30px;
+            cursor: pointer;
+        }
+    }
+
+    .center {
+        padding: 20px;
+        max-height: calc(100vh - 200px);
+        display: flex;
+        flex-direction: column; 
+        width: 100%; 
+        overflow-y: scroll;
+        height: 100%;
+
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .defaultText {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+            color: rgb(73, 72, 72);
+            font-size: 25px;
+            font-weight: bold;
+            margin: auto;
+        }
+
+        .chat {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-self: flex-end;
+        }
+    }
+
+    .bottom {
+       border-top: 1px solid rgb(202, 200, 200);
+       height: fit-content;
+       width: 100%;
+       padding:  20px;
+       z-index: 3;
+       position: relative;  
+       
+       .emojipicker {
+            position: absolute;
+            left: 20px;
+            bottom: 120px;
+            
+
+        }
+    }
+}
+
+/*------------ TEXT AREA ------------- */
+
+.textArea {
+    background-color: white;
+    color:  rgb(13, 13, 68);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 10px;
+    border-radius: 20px;
+    gap: 8px;
+    box-shadow: 0 2px 2px 2px rgba($color: #000000, $alpha: 0.04);
+    position: relative;
+
+
+    textarea,
+    button {
+        border: none;
+        outline: none;
+    }
+
+    .icon {
+        font-size: 30px; 
+        cursor: pointer;
+    }
+
+    textarea {
+        background-color: white;
+        width: 100%;
+        height: 70px;
+    }
+
+    button {
+        background-color: transparent;
+        color:  rgb(13, 13, 68);
+         
+    }
+}
+
+/*------ CHAT ITEM,, CONTAINS QUERY AND ITS RESPONSE ---- */
+
+.chatItem {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+/*------ QUERY AND RESPONSE ---- */
+
+.query,
+.response {
+
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+
+    .icon {
+        font-size: 30px;
+        color: rgb(25, 25, 77);
+    }
+
+    p {
+        width: 200px;
+        height: fit-content;
+        color: white; 
+        text-align: center;
+        border-radius: 8px;
+        padding: 10px;
+
+        @include smScreen() {
+            width: 250px;
+        }
+    }
+}
+
+.query{
+
+    align-self: flex-end;
+
+    p {
+        background-color: rgb(157, 157, 182);
+        border-bottom-right-radius: 0;
+    }
+    
+    
+}
+
+.response {
+    align-self: flex-start;
+
+    p {
+        background-color: rgb(83, 83, 100);
+        border-bottom-left-radius: 0;
+    }       
+}
+
